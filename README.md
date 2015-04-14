@@ -1,12 +1,11 @@
 BetDevFitNesse
 ==============
 
-[FitNesse](https://github.com/unclebob/fitnesse) Exec fixture in [slim format](http://www.fitnesse.org/FitNesse.UserGuide.WritingAcceptanceTests.SliM). Allows running RUntime.exec as a fixture. This project is licensed under [MIT](LICENSE).
+[FitNesse](https://github.com/unclebob/fitnesse) Exec fixture in [slim format](http://www.fitnesse.org/FitNesse.UserGuide.WritingAcceptanceTests.SliM). Allows running Runtime.exec as a fixture. This project is licensed under [MIT](LICENSE).
 
 #### Installation
 
 * This module must be in the [FitNesse classpath](http://www.fitnesse.org/FitNesse.FullReferenceGuide.UserGuide.WritingAcceptanceTests.ClassPath).
-* The jdbc driver which the fixture will be used to connect also must be on [FitNesse](https://github.com/unclebob/fitnesse) classpath.
 
 ```xml
 <dependency>
