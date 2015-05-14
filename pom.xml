@@ -159,6 +159,13 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>net.sf.jacob-project</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.14.3</version>
+        </dependency>
+        -->
     </dependencies>
 
 </project>
