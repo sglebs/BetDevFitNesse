@@ -23,6 +23,7 @@ public class AutoItFixture {
 
     private AutoItX autoIt = new AutoItX();
     private String lastWindowActivated = "";
+    int timeout = 10;
 
     public AutoItFixture() {
     }
@@ -31,24 +32,28 @@ public class AutoItFixture {
         autoIt.run(appPath);
     }
 
+    public void setTimeout (int timeoutInSeconds)  {
+        this.timeout = timeoutInSeconds;
+    }
+
     public void activateWindow(String windowTitle) {
         autoIt.winActivate(windowTitle);
         this.lastWindowActivated = windowTitle;
     }
 
-    public void waitForWindowActive(String windowTitle) {
-        autoIt.winWaitActive(windowTitle);
+    public boolean waitForWindowActive(String windowTitle) {
+        return autoIt.winWaitActive(windowTitle, "", timeout);
     }
-    public void waitForWindowActive() {
-        waitForWindowActive(lastWindowActivated);
-    }
-
-    public void clickControlOfWindow(String controlId, String windowTitle) {
-        autoIt.controlClick(windowTitle, "", controlId);
+    public boolean waitForWindowActive() {
+        return waitForWindowActive(lastWindowActivated);
     }
 
-    public void clickControlOfWindow(String controlId) {
-        clickControlOfWindow(controlId, lastWindowActivated);
+    public boolean clickControlOfWindow(String controlId, String windowTitle) {
+        return autoIt.controlClick(windowTitle, "", controlId);
+    }
+
+    public boolean clickControlOfWindow(String controlId) {
+        return clickControlOfWindow(controlId, lastWindowActivated);
     }
 
     public static void main(String[] args) throws InterruptedException {
