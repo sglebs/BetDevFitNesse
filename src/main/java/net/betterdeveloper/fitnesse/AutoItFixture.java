@@ -37,8 +37,8 @@ public class AutoItFixture {
     }
 
     public void activateWindow(String windowTitle) {
-        autoIt.winActivate(windowTitle);
         this.lastWindowActivated = windowTitle;
+        autoIt.winActivate(windowTitle);
     }
 
     public boolean waitForWindowActive(String windowTitle) {
@@ -52,7 +52,7 @@ public class AutoItFixture {
         return autoIt.controlClick(windowTitle, "", controlId);
     }
 
-    public boolean clickControlOfWindow(String controlId) {
+    public boolean clickControl(String controlId) {
         return clickControlOfWindow(controlId, lastWindowActivated);
     }
 
@@ -62,13 +62,13 @@ public class AutoItFixture {
         f.activateWindow("Calculator");
         f.waitForWindowActive();
         //Enter 3 - by ID
-        f.clickControlOfWindow("[ID:133]");
+        f.clickControl("[ID:133]");
         //Enter +
-        f.clickControlOfWindow("[ID:93]");
+        f.clickControl("[ID:93]");
         //Enter 3 - by ClassnameNN
-        f.clickControlOfWindow("[ClassnameNN:Button16]");
+        f.clickControl("[ClassnameNN:Button16]");
         //Enter =
-        f.clickControlOfWindow("[ID:121]");
+        f.clickControl("[ID:121]");
     }
 
 }
