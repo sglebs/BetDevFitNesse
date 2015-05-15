@@ -8,22 +8,31 @@ import com.jacob.com.LibraryLoader;
  */
 public class AutoItFixture {
 
-    public static String jvmBitVersion(){
+    private static String jvmBitVersion(){
         return System.getProperty("sun.arch.data.model");
+    }
+    static {
+        String jacobDllVersionToUse;
+        if (jvmBitVersion().contains("32")) jacobDllVersionToUse = "jacob-1.18-M2-x86.dll";
+        else jacobDllVersionToUse = "jacob-1.18-M2-x64.dll";
+        File file = new File("lib", jacobDllVersionToUse);
+        if (file.exists()) System.setProperty(LibraryLoader.JACOB_DLL_PATH, file.getAbsolutePath());
+        else System.setProperty(LibraryLoader.JACOB_DLL_PATH, jacobDllVersionToUse);
+        LibraryLoader.loadJacobLibrary();
+    }
+
+    private AutoItX autoIt = new AutoItX();
+
+    public AutoItFixture() {
+    }
+
+    public void startApp(String appPath) {
+        autoIt.run(appPath);
     }
 
     public static void main(String[] args) throws InterruptedException {
-        String jacobDllVersionToUse;
-        if (jvmBitVersion().contains("32")){
-            jacobDllVersionToUse = "jacob-1.18-M2-x86.dll";
-        }
-        else {
-            jacobDllVersionToUse = "jacob-1.18-M2-x64.dll";
-        }
-        File file = new File("lib", jacobDllVersionToUse);
-        System.setProperty(LibraryLoader.JACOB_DLL_PATH, file.getAbsolutePath());
-        LibraryLoader.loadJacobLibrary();
-        AutoItX x = new AutoItX();
+        AutoItFixture f = new AutoItFixture();
+        AutoItX x = f.autoIt;
         x.run("calc.exe");
         x.winActivate("Calculator");
         x.winWaitActive("Calculator");
@@ -39,4 +48,5 @@ public class AutoItFixture {
 //Enter =
         x.controlClick("Calculator", "", "121") ;
     }
+
 }
