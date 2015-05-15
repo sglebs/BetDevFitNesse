@@ -166,6 +166,20 @@
             <version>1.14.3</version>
         </dependency>
         -->
+        <dependency>
+            <groupId>net.sf.jacob-project</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.14.3</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jacob.jar</systemPath> <!-- because the oficial mvn one does not work. we use the downloaded jar -->
+        </dependency>
+        <dependency>
+            <groupId>AutoItX4Java</groupId>
+            <artifactId>AutoItX4Java</artifactId>
+            <version>2011.01</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/AutoItX4Java.jar</systemPath> <!-- because the there is no mvn jar -->
+        </dependency>
     </dependencies>
 
 </project>
