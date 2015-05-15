@@ -22,6 +22,7 @@ public class AutoItFixture {
     }
 
     private AutoItX autoIt = new AutoItX();
+    private String lastWindowActivated = "";
 
     public AutoItFixture() {
     }
@@ -32,31 +33,37 @@ public class AutoItFixture {
 
     public void activateWindow(String windowTitle) {
         autoIt.winActivate(windowTitle);
+        this.lastWindowActivated = windowTitle;
     }
 
     public void waitForWindowActive(String windowTitle) {
         autoIt.winWaitActive(windowTitle);
+    }
+    public void waitForWindowActive() {
+        waitForWindowActive(lastWindowActivated);
     }
 
     public void clickControlOfWindow(String controlId, String windowTitle) {
         autoIt.controlClick(windowTitle, "", controlId);
     }
 
+    public void clickControlOfWindow(String controlId) {
+        clickControlOfWindow(controlId, lastWindowActivated);
+    }
+
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
+        f.startApp("calc.exe");
         f.activateWindow("Calculator");
-        f.waitForWindowActive("Calculator");
-//Enter 3 - by ID
-        f.clickControlOfWindow("[ID:133]", "Calculator") ;
-        Thread.sleep(1000);
-//Enter +
-        f.clickControlOfWindow("[ID:93]", "Calculator") ;
-        Thread.sleep(1000);
-//Enter 3 - by ClassnameNN
-        f.clickControlOfWindow("[ClassnameNN:Button16]", "Calculator") ;
-        Thread.sleep(1000);
-//Enter =
-        f.clickControlOfWindow("[ID:121]", "Calculator") ;
+        f.waitForWindowActive();
+        //Enter 3 - by ID
+        f.clickControlOfWindow("[ID:133]");
+        //Enter +
+        f.clickControlOfWindow("[ID:93]");
+        //Enter 3 - by ClassnameNN
+        f.clickControlOfWindow("[ClassnameNN:Button16]");
+        //Enter =
+        f.clickControlOfWindow("[ID:121]");
     }
 
 }
