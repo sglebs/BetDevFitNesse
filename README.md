@@ -52,7 +52,7 @@ You will also need to manually copy our lib/*.jar files to where you have your o
 
 ####  AutoIt Sample:
 ```
-!define TEST_SYSTEM {slim}
+!define TEST_SYSTEM {slim} 
 !path ./dependencies/*
 
 |import|
@@ -62,5 +62,11 @@ You will also need to manually copy our lib/*.jar files to where you have your o
 |Auto It Fixture |
 
 | script|
-| start app| calc.exe |
+| start app | calc.exe |
+| activate window | "Calculator" |
+| wait for window active |
+| click control |[ID:133] |
+| click control |[ID:93] | 
+| click control |[ID:133] |
+| click control |[ID:121] |
 ```
