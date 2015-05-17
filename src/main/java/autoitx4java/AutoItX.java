@@ -2155,6 +2155,14 @@ public class AutoItX {
 
     }
 
+    private Variant winVariant(String title, String text, int timeout, String function) {
+        Variant vTitle = new Variant(title);
+        Variant vText = new Variant(text);
+        Variant vTimeout = new Variant(timeout);
+        Variant[] params = new Variant[]{vTitle, vText, vTimeout};
+        return autoItX.invoke(function, params);
+    }
+
     private Variant winVariant(String title, String text, String function) {
         Variant vTitle = new Variant(title);
         Variant vText = new Variant(text);
@@ -2173,16 +2181,16 @@ public class AutoItX {
      * @param title The title of the window to activate.
      * @param text The text of the window to activate.
      */
-    public void winActivate(String title, String text) {
-        winVariant(title, text, "WinActivate");
+    public boolean winActivate(String title, String text) {
+        return nullToFalse(winVariant(title, text, "WinActivate"));
     }
 
     /**
      * Activates (gives focus to) a window.
      * @param title The title of the window to activate.
      */
-    public void winActivate(String title) {
-        winVariant(title, "WinActivate");
+    public boolean winActivate(String title) {
+        return nullToFalse(winVariant(title, "WinActivate"));
     }
 
     /**
@@ -2986,5 +2994,18 @@ public class AutoItX {
         }
 
         return false;
+    }
+
+    /**
+     * Converts the value null to false, anything else to true.
+     * @param v The value to convert to true/false
+     * @return null = false, anything else = true.
+     */
+    private boolean nullToFalse(Variant v) {
+        int vt = v.getvt();
+        if (vt == Variant.VariantNull || vt == Variant.VariantEmpty)
+            return false;
+        else
+            return true;
     }
 }
