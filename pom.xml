@@ -173,13 +173,15 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/jacob.jar</systemPath> <!-- because the oficial mvn one does not work. we use the downloaded jar -->
         </dependency>
+        <!-- now we inline the java source for AutoItX4Java
         <dependency>
             <groupId>AutoItX4Java</groupId>
             <artifactId>AutoItX4Java</artifactId>
             <version>2011.01</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/AutoItX4Java.jar</systemPath> <!-- because the there is no mvn jar -->
+            <systemPath>${project.basedir}/lib/AutoItX4Java.jar</systemPath>
         </dependency>
+        -->
     </dependencies>
 
 </project>
