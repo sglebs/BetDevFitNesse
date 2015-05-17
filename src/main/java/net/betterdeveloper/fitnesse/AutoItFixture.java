@@ -28,6 +28,9 @@ public class AutoItFixture {
     public AutoItFixture() {
     }
 
+    public String setOptionTo (String option, String value) {
+        return autoIt.autoItSetOption(option,value);
+    }
     public void startApp(String appPath) {
         autoIt.run(appPath);
     }
@@ -36,16 +39,29 @@ public class AutoItFixture {
         this.timeout = timeoutInSeconds;
     }
 
-    public void activateWindow(String windowTitle) {
+    public boolean activateWindow(String windowTitle) {
         this.lastWindowActivated = windowTitle;
-        autoIt.winActivate(windowTitle);
+        return autoIt.winActivate(windowTitle);
+    }
+
+    public boolean waitForWindow(String windowTitle) {
+        return autoIt.winWait(windowTitle, "", timeout);
+    }
+
+    public boolean waitForWindow() {
+        return waitForWindow(lastWindowActivated);
     }
 
     public boolean waitForWindowActive(String windowTitle) {
         return autoIt.winWaitActive(windowTitle, "", timeout);
     }
+
     public boolean waitForWindowActive() {
         return waitForWindowActive(lastWindowActivated);
+    }
+
+    public String getHandleOfWindow(String windowTitle) {
+        return autoIt.winGetHandle(windowTitle);
     }
 
     public boolean clickControlOfWindow(String controlId, String windowTitle) {
@@ -59,7 +75,12 @@ public class AutoItFixture {
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         f.startApp("calc.exe");
-        f.activateWindow("Calculator");
+        String prevValue = f.setOptionTo("WinWaitDelay", "500");
+        System.out.println(prevValue);
+        boolean waited = f.waitForWindow("[CLASS:CalcFrame]");
+        System.out.println (waited);
+        boolean activated = f.activateWindow("[CLASS:CalcFrame]");
+        System.out.println (activated);
         f.waitForWindowActive();
         //Enter 3 - by ID
         f.clickControl("[ID:133]");
@@ -69,6 +90,7 @@ public class AutoItFixture {
         f.clickControl("[ClassnameNN:Button16]");
         //Enter =
         f.clickControl("[ID:121]");
+        System.out.print(f.getHandleOfWindow("Calculator"));
     }
 
 }
