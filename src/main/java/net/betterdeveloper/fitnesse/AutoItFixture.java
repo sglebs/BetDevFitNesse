@@ -28,6 +28,14 @@ public class AutoItFixture {
     public AutoItFixture() {
     }
 
+    public int getErrorCode() {
+        return autoIt.getError();
+    }
+
+    public String getVersion() {
+        return autoIt.getVersion();
+    }
+
     public String setWinWaitDelayTo(int new_delay) {
         return autoIt.autoItSetOption("WinWaitDelay", String.valueOf(new_delay));
     }
@@ -132,6 +140,19 @@ public class AutoItFixture {
         return autoIt.controlGetText(lastWindowTitleManipulated, "", controlId);
     }
 
+    public String getTextInStatusBar(String windowTitle){
+        lastWindowTitleManipulated=windowTitle;
+        return autoIt.statusbarGetText(windowTitle);
+    }
+
+    public String getTextInStatusBar(){
+        return autoIt.statusbarGetText(lastWindowTitleManipulated);
+    }
+
+    public String getTextInClipboard(){
+        return autoIt.clipGet();
+    }
+
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         int pid = f.startApp("calc.exe");
@@ -152,8 +173,12 @@ public class AutoItFixture {
         //Enter =
         f.clickControl("[ID:121]");
         System.out.println(f.getHandleOfWindow("Calculator"));
-        f.sendKeys("7*3=");
+        f.sendRawKeys("*7*3=");
+        f.sendKeys("^c"); //copy
         System.out.println ("[ClassnameNN:#327701]=" + f.getTextInControl("[ClassnameNN:#327701]"));
+        System.out.println(f.getErrorCode());
+        System.out.println(f.getVersion());
+        System.out.println("Clipboard=" + f.getTextInClipboard());
         f.closeWindow();
     }
 
