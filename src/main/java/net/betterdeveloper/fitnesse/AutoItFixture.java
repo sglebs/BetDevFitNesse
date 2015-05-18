@@ -51,6 +51,15 @@ public class AutoItFixture {
         this.timeout = timeoutInSeconds;
     }
 
+    public void closeWindow (String windowTitle) {
+        lastWindowTitleManipulated = windowTitle;
+        autoIt.winClose(windowTitle);
+    }
+
+    public void closeWindow () {
+        autoIt.winClose(lastWindowTitleManipulated);
+    }
+
     public void activateWindow(String windowTitle) {
         this.lastWindowTitleManipulated = windowTitle.trim();
         autoIt.winActivate(windowTitle.trim()); // TODO: this always returns false. Why??
@@ -103,6 +112,26 @@ public class AutoItFixture {
         autoIt.send(keys, true);
     }
 
+    public boolean sendKeysToControl(String text, String controlId){
+        return autoIt.controlSend(lastWindowTitleManipulated, "", controlId, text, false);
+    }
+
+    public boolean sendRawKeysToControl(String text, String controlId){
+        return autoIt.controlSend(lastWindowTitleManipulated, "", controlId, text, true);
+    }
+
+    public void appendTextInControl(String text, String controlId){
+        autoIt.controlCommandAddString(lastWindowTitleManipulated, "", controlId, text);
+    }
+
+    public boolean setTextInControl(String text, String controlId){
+        return autoIt.controlSetText(lastWindowTitleManipulated, "", controlId, text);
+    }
+
+    public String getTextInControl(String controlId){
+        return autoIt.controlGetText(lastWindowTitleManipulated, "", controlId);
+    }
+
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         int pid = f.startApp("calc.exe");
@@ -122,8 +151,10 @@ public class AutoItFixture {
         f.clickControl("[ClassnameNN:Button16]");
         //Enter =
         f.clickControl("[ID:121]");
-        System.out.print(f.getHandleOfWindow("Calculator"));
+        System.out.println(f.getHandleOfWindow("Calculator"));
         f.sendKeys("7*3=");
+        System.out.println ("[ClassnameNN:#327701]=" + f.getTextInControl("[ClassnameNN:#327701]"));
+        f.closeWindow();
     }
 
 }
