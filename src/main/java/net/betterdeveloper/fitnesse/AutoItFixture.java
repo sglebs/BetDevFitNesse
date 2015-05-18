@@ -95,6 +95,14 @@ public class AutoItFixture {
         return clickControlOfWindow(controlId, lastWindowTitleManipulated);
     }
 
+    public void sendKeys (String keys){
+        autoIt.send(keys, false);
+    }
+
+    public void sendRawKeys (String keys){
+        autoIt.send(keys, true);
+    }
+
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         int pid = f.startApp("calc.exe");
@@ -115,6 +123,7 @@ public class AutoItFixture {
         //Enter =
         f.clickControl("[ID:121]");
         System.out.print(f.getHandleOfWindow("Calculator"));
+        f.sendKeys("7*3=");
     }
 
 }
