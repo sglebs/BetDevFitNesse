@@ -22,7 +22,7 @@ public class AutoItFixture {
     }
 
     private AutoItX autoIt = new AutoItX();
-    private String lastWindowActivated = "";
+    private String lastWindowTitleManipulated = "";
     int timeout = 10;
 
     public AutoItFixture() {
@@ -51,17 +51,21 @@ public class AutoItFixture {
         this.timeout = timeoutInSeconds;
     }
 
-    public boolean activateWindow(String windowTitle) {
-        this.lastWindowActivated = windowTitle.trim();
-        return autoIt.winActivate(windowTitle.trim());
+    public void activateWindow(String windowTitle) {
+        this.lastWindowTitleManipulated = windowTitle.trim();
+        autoIt.winActivate(windowTitle.trim()); // TODO: this always returns false. Why??
+    }
+    public void activateWindow() {
+        activateWindow(lastWindowTitleManipulated);
     }
 
     public boolean waitForWindowCreated(String windowTitle) {
+        this.lastWindowTitleManipulated = windowTitle.trim();
         return autoIt.winWait(windowTitle.trim(), "", timeout);
     }
 
     public boolean waitForWindowCreated() {
-        return waitForWindowCreated(lastWindowActivated);
+        return waitForWindowCreated(lastWindowTitleManipulated);
     }
 
     public boolean waitForWindowActive(String windowTitle) {
@@ -69,7 +73,14 @@ public class AutoItFixture {
     }
 
     public boolean waitForWindowActive() {
-        return waitForWindowActive(lastWindowActivated);
+        return waitForWindowActive(lastWindowTitleManipulated);
+    }
+
+    public boolean waitForWindowReady(String windowTitle){
+        boolean created = waitForWindowCreated(windowTitle);
+        activateWindow(windowTitle);
+        boolean isActive = waitForWindowActive(windowTitle);
+        return created & isActive;
     }
 
     public String getHandleOfWindow(String windowTitle) {
@@ -77,11 +88,11 @@ public class AutoItFixture {
     }
 
     public boolean clickControlOfWindow(String controlId, String windowTitle) {
-        return autoIt.controlClick(windowTitle.trim(), "", "[" + controlId.trim() + "]" );
+        return autoIt.controlClick(windowTitle.trim(), "", controlId.trim());
     }
 
     public boolean clickControl(String controlId) {
-        return clickControlOfWindow(controlId, lastWindowActivated);
+        return clickControlOfWindow(controlId, lastWindowTitleManipulated);
     }
 
     public static void main(String[] args) throws InterruptedException {
@@ -92,18 +103,17 @@ public class AutoItFixture {
         System.out.println(prevValue);
         boolean created = f.waitForWindowCreated("Calculator");
         System.out.println (created);
-        boolean activated = f.activateWindow("Calculator");
-        System.out.println (activated);
+        f.activateWindow("Calculator");
         boolean isActive = f.waitForWindowActive();
         System.out.println (isActive);
         //Enter 3 - by ID
-        f.clickControl("ID:133");
+        f.clickControl("[ID:133]");
         //Enter +
-        f.clickControl("ID:93");
+        f.clickControl("[ID:93]");
         //Enter 3 - by ClassnameNN
-        f.clickControl("ClassnameNN:Button16");
+        f.clickControl("[ClassnameNN:Button16]");
         //Enter =
-        f.clickControl("ID:121");
+        f.clickControl("[ID:121]");
         System.out.print(f.getHandleOfWindow("Calculator"));
     }
 

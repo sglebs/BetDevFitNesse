@@ -22,14 +22,5 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: AutoItX4Java:AutoItX4Java:2011.01">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/AutoItX4Java.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>

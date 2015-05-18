@@ -62,11 +62,11 @@ You will also need to manually copy our lib/*.jar files to where you have your o
 |Auto It Fixture |
 
 | script|
-| start app | calc.exe |
-| activate window | "Calculator" |
-| wait for window active |
-| click control |[ID:133] |
-| click control |[ID:93] | 
-| click control |[ID:133] |
-| click control |[ID:121] |
+| $oldDelay= | set win wait delay to | 200|
+| $pid= | start app | calc.exe |
+| wait for window ready | Calculator |
+| click control |[ID:133]|
+| click control |[ID:93]| 
+| click control |[ID:133]|
+| click control |[ID:121]|
 ```
