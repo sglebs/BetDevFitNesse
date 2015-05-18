@@ -70,5 +70,7 @@ You will also need to manually copy our lib/*.jar files to where you have your o
 | click control |[ID:133]|
 | click control |[ID:121]|
 | send raw keys | *3+7=|
+| send keys | ^c |
+| check | get text in clipboard | 25 |
 | close window |
 ```
