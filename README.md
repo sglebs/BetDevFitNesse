@@ -69,4 +69,6 @@ You will also need to manually copy our lib/*.jar files to where you have your o
 | click control |[ID:93]| 
 | click control |[ID:133]|
 | click control |[ID:121]|
+| send raw keys | *3+7=|
+| close window |
 ```
