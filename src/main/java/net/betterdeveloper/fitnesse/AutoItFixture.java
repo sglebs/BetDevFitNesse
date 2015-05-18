@@ -153,6 +153,10 @@ public class AutoItFixture {
         return autoIt.clipGet();
     }
 
+    public void setTextInClipboard(String text){
+        autoIt.clipPut(text);
+    }
+
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         int pid = f.startApp("calc.exe");
