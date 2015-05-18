@@ -1954,7 +1954,7 @@ public class AutoItX {
      * @param string The new text to be set into the control.
      * @return True if success, false otherwise
      */
-    public boolean ControlSetText(String title, String text, String control, String string) {
+    public boolean controlSetText(String title, String text, String control, String string) {
         Variant vTitle = new Variant(title);
         Variant vText = new Variant(text);
         Variant vControl = new Variant(control);
