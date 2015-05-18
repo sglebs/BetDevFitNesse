@@ -28,11 +28,23 @@ public class AutoItFixture {
     public AutoItFixture() {
     }
 
-    public String setOptionTo (String option, String value) {
-        return autoIt.autoItSetOption(option,value);
+    public String setWinWaitDelayTo(int new_delay) {
+        return autoIt.autoItSetOption("WinWaitDelay", String.valueOf(new_delay));
     }
-    public void startApp(String appPath) {
-        autoIt.run(appPath);
+
+    public String setOptionTo (String option, String value) {
+        return autoIt.autoItSetOption(option.trim(),value);
+    }
+    public int startApp(String appPath) {
+        return autoIt.run(appPath);
+    }
+
+    public int startAppInWOrkingDir(String appPath, String workingDir) {
+        return autoIt.run(appPath, workingDir);
+    }
+
+    public int startAppInWOrkingDirAndShowFlags(String appPath, String workingDir, int showFlag) {
+        return autoIt.run(appPath, workingDir, showFlag);
     }
 
     public void setTimeout (int timeoutInSeconds)  {
@@ -40,20 +52,20 @@ public class AutoItFixture {
     }
 
     public boolean activateWindow(String windowTitle) {
-        this.lastWindowActivated = windowTitle;
-        return autoIt.winActivate(windowTitle);
+        this.lastWindowActivated = windowTitle.trim();
+        return autoIt.winActivate(windowTitle.trim());
     }
 
-    public boolean waitForWindow(String windowTitle) {
-        return autoIt.winWait(windowTitle, "", timeout);
+    public boolean waitForWindowCreated(String windowTitle) {
+        return autoIt.winWait(windowTitle.trim(), "", timeout);
     }
 
-    public boolean waitForWindow() {
-        return waitForWindow(lastWindowActivated);
+    public boolean waitForWindowCreated() {
+        return waitForWindowCreated(lastWindowActivated);
     }
 
     public boolean waitForWindowActive(String windowTitle) {
-        return autoIt.winWaitActive(windowTitle, "", timeout);
+        return autoIt.winWaitActive(windowTitle.trim(), "", timeout);
     }
 
     public boolean waitForWindowActive() {
@@ -61,11 +73,11 @@ public class AutoItFixture {
     }
 
     public String getHandleOfWindow(String windowTitle) {
-        return autoIt.winGetHandle(windowTitle);
+        return autoIt.winGetHandle(windowTitle.trim());
     }
 
     public boolean clickControlOfWindow(String controlId, String windowTitle) {
-        return autoIt.controlClick(windowTitle, "", controlId);
+        return autoIt.controlClick(windowTitle.trim(), "", "[" + controlId.trim() + "]" );
     }
 
     public boolean clickControl(String controlId) {
@@ -74,22 +86,24 @@ public class AutoItFixture {
 
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
-        f.startApp("calc.exe");
+        int pid = f.startApp("calc.exe");
+        System.out.println(pid);
         String prevValue = f.setOptionTo("WinWaitDelay", "500");
         System.out.println(prevValue);
-        boolean waited = f.waitForWindow("[CLASS:CalcFrame]");
-        System.out.println (waited);
-        boolean activated = f.activateWindow("[CLASS:CalcFrame]");
+        boolean created = f.waitForWindowCreated("Calculator");
+        System.out.println (created);
+        boolean activated = f.activateWindow("Calculator");
         System.out.println (activated);
-        f.waitForWindowActive();
+        boolean isActive = f.waitForWindowActive();
+        System.out.println (isActive);
         //Enter 3 - by ID
-        f.clickControl("[ID:133]");
+        f.clickControl("ID:133");
         //Enter +
-        f.clickControl("[ID:93]");
+        f.clickControl("ID:93");
         //Enter 3 - by ClassnameNN
-        f.clickControl("[ClassnameNN:Button16]");
+        f.clickControl("ClassnameNN:Button16");
         //Enter =
-        f.clickControl("[ID:121]");
+        f.clickControl("ID:121");
         System.out.print(f.getHandleOfWindow("Calculator"));
     }
 
