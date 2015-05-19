@@ -1644,7 +1644,8 @@ public class AutoItX {
         return controlView(title, text, control, command, option, option2, "ControlListView").getInt();
     }
 
-    private String controlListViewString(String title, String text, String control,
+    // @sglebs - was private
+    public String controlListViewString(String title, String text, String control,
                                          String command, String option, String option2) {
         return controlView(title, text, control, command, option, option2, "ControlListView").getString();
     }
