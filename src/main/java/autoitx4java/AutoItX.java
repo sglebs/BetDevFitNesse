@@ -1135,7 +1135,7 @@ public class AutoItX {
      * @param controlID The control to interact with.
      * @param button The button to click, "left", "right" or "middle". 
      *               Default is the left button.
-     * @param clicks The number of times to click the mouse. Default is center.
+     * @param clicks The number of times to click the mouse. Default is 1.
      * @param x The x position to click within the control. Default is center.
      * @param y The y position to click within the control. Default is center.
      * @return True if success, false otherwise.
@@ -1161,7 +1161,7 @@ public class AutoItX {
      * @param controlID The control to interact with.
      * @param button The button to click, "left", "right" or "middle". 
      *               Default is the left button.
-     * @param clicks The number of times to click the mouse. Default is center.
+     * @param clicks The number of times to click the mouse. Default is 1.
      * @return True if success, false otherwise.
      */
     public boolean controlClick(String title, String text, String controlID,
@@ -1200,7 +1200,8 @@ public class AutoItX {
         return controlClick(title, text, controlID, "left", 1);
     }
 
-    private String controlCommandString(String title, String text, String control,
+    // @sglebs - was private
+    public String controlCommandString(String title, String text, String control,
                                         String command, String option) {
         Variant result = controlCommandVariant(title, text, control, command, option);
         return result.getString();
