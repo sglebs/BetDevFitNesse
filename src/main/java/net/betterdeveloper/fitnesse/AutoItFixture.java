@@ -230,6 +230,36 @@ public class AutoItFixture {
     public String controlWithFocus() {
         return autoIt.controlGetFocus(lastWindowTitleManipulated);
     }
+
+    public String executeCommandInListViewOfWindowWithOptionAndOption(String command, String controlId, String windowTitle, String option, String option2){
+        lastWindowTitleManipulated=windowTitle;
+        return autoIt.controlListViewString(windowTitle, "", controlId, command, option, option2);
+    }
+
+    public String executeCommandInListViewWithOptionAndOption(String command, String controlId, String option, String option2){
+        return executeCommandInListViewOfWindowWithOptionAndOption(command, controlId, lastWindowTitleManipulated, option, option2);
+    }
+
+    public int getItemCountOfListView (String controlId) {
+        return autoIt.controlListViewGetItemCount(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public int findItemAndSubitemOfListView (String item, String subItem, String controlId) {
+        return autoIt.controlListViewFindItem(lastWindowTitleManipulated,"", controlId, item, subItem);
+    }
+
+    public int getSelectionCountOfListView (String controlId) {
+        return autoIt.controlListViewGetSelectedCount(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public String getSelectedItemOfListView (String controlId) {
+        return autoIt.controlListViewGetSelected(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public boolean isSelectionOfListView (String item, String controlId) {
+        return autoIt.controlListViewIsSelected(lastWindowTitleManipulated,"", controlId, item);
+    }
+
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         int pid = f.startApp("calc.exe");
