@@ -104,12 +104,28 @@ public class AutoItFixture {
         return autoIt.winGetHandle(windowTitle.trim());
     }
 
+    public boolean clickControlOfWindowWithButtonTimesXY(String controlId, String windowTitle, String button, int count, int x, int y) {
+        return autoIt.controlClick(windowTitle.trim(), "", controlId.trim(), button, count, x, y);
+    }
+
+    public boolean clickControlOfWindowWithButtonTimes(String controlId, String windowTitle, String button, int count) {
+        return autoIt.controlClick(windowTitle.trim(), "", controlId.trim(), button, count);
+    }
+
+    public boolean clickControlOfWindowWithButton(String controlId, String windowTitle, String button) {
+        return autoIt.controlClick(windowTitle.trim(), "", controlId.trim(), button);
+    }
+
     public boolean clickControlOfWindow(String controlId, String windowTitle) {
         return autoIt.controlClick(windowTitle.trim(), "", controlId.trim());
     }
 
     public boolean clickControl(String controlId) {
         return clickControlOfWindow(controlId, lastWindowTitleManipulated);
+    }
+
+    public boolean clickControlWithButton(String controlId, String button) {
+        return clickControlOfWindowWithButton(controlId, lastWindowTitleManipulated, button);
     }
 
     public void sendKeys (String keys){
@@ -157,6 +173,63 @@ public class AutoItFixture {
         autoIt.clipPut(text);
     }
 
+    public String getTabOfControlOfWindow (String controlId, String windowTitle) {
+        lastWindowTitleManipulated=windowTitle;
+        return autoIt.controlCommandCurrentTab(windowTitle,"", controlId);
+    }
+
+    public String getTabOfControl (String controlId) {
+        return getTabOfControlOfWindow(controlId,lastWindowTitleManipulated);
+    }
+
+    public void goToTabRightOfControl (String controlId) {
+        autoIt.controlCommandTabRight(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public void goToTabLeftOfControl (String controlId) {
+        autoIt.controlCommandTabLeft(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public String executeCommandInControlOfWindowWithOption(String command, String controlId, String windowTitle, String option){
+        lastWindowTitleManipulated=windowTitle;
+        return autoIt.controlCommandString(windowTitle, "", controlId, command, option);
+    }
+
+    public String executeCommandInControlWithOption(String command, String controlId, String option){
+        return executeCommandInControlOfWindowWithOption(command, controlId, lastWindowTitleManipulated, option);
+    }
+
+    public String executeCommandInControl(String command, String controlId){
+        return executeCommandInControlWithOption(command, controlId, "");
+    }
+
+    public boolean controlIsChecked (String controlId) {
+        return autoIt.controlCommandIsChecked(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public void checkControl (String controlId) {
+        autoIt.controlCommandCheck(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public boolean controlIsEnabled (String controlId) {
+        return autoIt.controlCommandIsEnabled(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public boolean controlIsVisible (String controlId) {
+        return autoIt.controlCommandIsVisible(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public void selectItemOfControl (String item, String controlId) {
+        autoIt.controlCommandSelectString(lastWindowTitleManipulated, "", controlId, item);
+    }
+
+    public boolean focusOnControl (String controlId) {
+        return autoIt.controlFocus(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public String controlWithFocus() {
+        return autoIt.controlGetFocus(lastWindowTitleManipulated);
+    }
     public static void main(String[] args) throws InterruptedException {
         AutoItFixture f = new AutoItFixture();
         int pid = f.startApp("calc.exe");
