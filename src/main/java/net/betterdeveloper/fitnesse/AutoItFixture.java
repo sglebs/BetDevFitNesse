@@ -78,7 +78,8 @@ public class AutoItFixture {
 
     public boolean waitForWindowCreated(String windowTitle) {
         this.lastWindowTitleManipulated = windowTitle.trim();
-        return autoIt.winWait(windowTitle.trim(), "", timeout);
+        //autoIt.clipPut(lastWindowTitleManipulated); //DEBUG
+        return autoIt.winWait(lastWindowTitleManipulated, "", timeout);
     }
 
     public boolean waitForWindowCreated() {
@@ -86,7 +87,9 @@ public class AutoItFixture {
     }
 
     public boolean waitForWindowActive(String windowTitle) {
-        return autoIt.winWaitActive(windowTitle.trim(), "", timeout);
+        this.lastWindowTitleManipulated = windowTitle.trim();
+        //autoIt.clipPut(lastWindowTitleManipulated); //DEBUG
+        return autoIt.winWaitActive(lastWindowTitleManipulated, "", timeout);
     }
 
     public boolean waitForWindowActive() {
