@@ -107,6 +107,10 @@ public class AutoItFixture {
         return autoIt.winGetHandle(windowTitle.trim());
     }
 
+    public String getTextInWindow(){
+        return autoIt.winGetText(lastWindowTitleManipulated).replaceAll("(\\r|\\n)", ""); // see https://www.autoitscript.com/forum/topic/55945-getting-value-from-visible-text/
+    }
+
     public boolean clickControlOfWindowWithButtonTimesXY(String controlId, String windowTitle, String button, int count, int x, int y) {
         return autoIt.controlClick(windowTitle.trim(), "", controlId.trim(), button, count, x, y);
     }
@@ -289,6 +293,8 @@ public class AutoItFixture {
         System.out.println(f.getErrorCode());
         System.out.println(f.getVersion());
         System.out.println("Clipboard=" + f.getTextInClipboard());
+        String wText = f.getTextInWindow();
+        System.out.println("Window text=" + wText);
         f.closeWindow();
     }
 
