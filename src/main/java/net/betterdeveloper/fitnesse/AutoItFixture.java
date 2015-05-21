@@ -44,7 +44,7 @@ public class AutoItFixture {
         return autoIt.autoItSetOption(option.trim(),value);
     }
     public int startApp(String appPath) {
-        return autoIt.run(appPath);
+        return autoIt.run(appPath, "", AutoItX.SW_SHOW); // current default dir, show window
     }
 
     public int startAppInWOrkingDir(String appPath, String workingDir) {
@@ -265,6 +265,14 @@ public class AutoItFixture {
 
     public boolean isSelectionOfListView (String item, String controlId) {
         return autoIt.controlListViewIsSelected(lastWindowTitleManipulated,"", controlId, item);
+    }
+
+    public boolean selectMenuItem (String menuItem){
+        return autoIt.winMenuSelectItem(lastWindowTitleManipulated, "", menuItem);
+    }
+
+    public boolean selectMenuItemSubitem (String menuItem, String subItem){
+        return autoIt.winMenuSelectItem(lastWindowTitleManipulated, "", menuItem, subItem);
     }
 
     public static void main(String[] args) throws InterruptedException {
