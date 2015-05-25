@@ -43,15 +43,19 @@ public class AutoItFixture {
     public String setOptionTo (String option, String value) {
         return autoIt.autoItSetOption(option.trim(),value);
     }
-    public int startApp(String appPath) {
-        return autoIt.run(appPath, "", AutoItX.SW_SHOW); // current default dir, show window
+    public int startAppWithShowFlag(String appPath, int flag) {
+        return autoIt.run(appPath, "", flag);
     }
 
-    public int startAppInWOrkingDir(String appPath, String workingDir) {
+    public int startApp(String appPath) {
+        return startAppWithShowFlag(appPath, AutoItX.SW_SHOW); // current default dir, show window
+    }
+
+    public int startAppInWorkingDir(String appPath, String workingDir) {
         return autoIt.run(appPath, workingDir);
     }
 
-    public int startAppInWOrkingDirAndShowFlags(String appPath, String workingDir, int showFlag) {
+    public int startAppInWorkingDirAndShowFlag(String appPath, String workingDir, int showFlag) {
         return autoIt.run(appPath, workingDir, showFlag);
     }
 
@@ -100,7 +104,7 @@ public class AutoItFixture {
         boolean created = waitForWindowCreated(windowTitle);
         activateWindow(windowTitle);
         boolean isActive = waitForWindowActive(windowTitle);
-        return created & isActive;
+        return created && isActive;
     }
 
     public String getHandleOfWindow(String windowTitle) {
@@ -156,7 +160,14 @@ public class AutoItFixture {
     }
 
     public boolean setTextInControl(String text, String controlId){
-        return autoIt.controlSetText(lastWindowTitleManipulated, "", controlId, text);
+        boolean ok =  autoIt.controlSetText(lastWindowTitleManipulated, "", controlId, text);
+        if (!ok) { //https://www.autoitscript.com/forum/topic/124240-controlsettext-not-working-sometimes/
+            ok = focusOnControl(controlId);
+            if (ok) {
+                ok = autoIt.controlSetText(lastWindowTitleManipulated, "", controlId, text);
+            }
+        }
+        return ok;
     }
 
     public String getTextInControl(String controlId){
@@ -210,6 +221,19 @@ public class AutoItFixture {
         return executeCommandInControlWithOption(command, controlId, "");
     }
 
+    public boolean executeBooleanCommandInControlOfWindowWithOption(String command, String controlId, String windowTitle, String option){
+        lastWindowTitleManipulated=windowTitle;
+        return autoIt.controlCommandBoolean(windowTitle, "", controlId, command, option);
+    }
+
+    public boolean executeBooleanCommandInControlWithOption(String command, String controlId, String option){
+        return executeBooleanCommandInControlOfWindowWithOption(command, controlId, lastWindowTitleManipulated, option);
+    }
+
+    public boolean executeBooleanCommandInControl(String command, String controlId){
+        return executeBooleanCommandInControlWithOption(command, controlId, "");
+    }
+
     public boolean controlIsChecked (String controlId) {
         return autoIt.controlCommandIsChecked(lastWindowTitleManipulated, "", controlId);
     }
@@ -232,6 +256,10 @@ public class AutoItFixture {
 
     public boolean focusOnControl (String controlId) {
         return autoIt.controlFocus(lastWindowTitleManipulated, "", controlId);
+    }
+
+    public void pasteInControl (String text, String controlId) {
+        autoIt.controlCommandEditPaste(lastWindowTitleManipulated,"",controlId, text);
     }
 
     public String controlWithFocus() {

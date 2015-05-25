@@ -1207,6 +1207,13 @@ public class AutoItX {
         return result.getString();
     }
 
+    // @sglebs - was needed
+    public int controlCommandInt(String title, String text, String control,
+                                       String command, String option) {
+        Variant result = controlCommandVariant(title, text, control, command, option);
+        return result.getInt();
+    }
+
     private void controlCommandVoid(String title, String text, String control,
                                     String command, String option) {
         controlCommandVariant(title, text, control, command, option);
@@ -1320,7 +1327,8 @@ public class AutoItX {
         controlCommandVoid(title, text, control, "SelectString", string);
     }
 
-    private boolean controlCommandBoolean(String title, String text, String control,
+    // @sglebs - was private
+    public boolean controlCommandBoolean(String title, String text, String control,
                                           String command, String option) {
         return oneToTrue(controlCommandInts(title, text, control, command, option));
     }
