@@ -266,7 +266,7 @@ public class AutoItFixture {
     /**
      * <p>Returns the low-level handle for the given window</p>
      * <p><code>
-     * | get handle of window | Calculator |
+     * | $handle= | get handle of window | Calculator |
      * </code></p>
      *
      * @param   windowTitle    The title of the window to wait for
@@ -280,7 +280,7 @@ public class AutoItFixture {
      * <p>Returns the text in the last window that was manipulated with any API that
      * takes a window title. All cr lf are removed</p>
      * <p><code>
-     * | get text in window |
+     * | $text= | get text in window |
      * </code></p>
      *
      * @return  String         The handle for teh given window. An opaque value.
@@ -637,35 +637,113 @@ public class AutoItFixture {
         return executeBooleanCommandInControlWithOption(command, controlId, "");
     }
 
+    /**
+     * <p>Returns true if the given control is checked - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | control is checked | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  boolean  true if the control is checked
+     */
     public boolean controlIsChecked (String controlId) {
         return autoIt.controlCommandIsChecked(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Check the given control - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | check control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     */
     public void checkControl (String controlId) {
         autoIt.controlCommandCheck(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Returns true if the given control is enabled - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | control is enabled | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  boolean  true if the control is enabled
+     */
     public boolean controlIsEnabled (String controlId) {
         return autoIt.controlCommandIsEnabled(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Returns true if the given control is visible - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | control is visible | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  boolean  true if the control is visible
+     */
     public boolean controlIsVisible (String controlId) {
         return autoIt.controlCommandIsVisible(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Select a given item in the control - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | select item | London | of control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param item  The element to be selected
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     */
     public void selectItemOfControl (String item, String controlId) {
         autoIt.controlCommandSelectString(lastWindowTitleManipulated, "", controlId, item);
     }
 
+    /**
+     * <p>Focus the given control - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | focus on control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  boolean  true if the focus worked
+     */
     public boolean focusOnControl (String controlId) {
         return autoIt.controlFocus(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Paste the given text in the given control - in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | paste | my text | in control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param text  The text to paste
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     */
     public void pasteInControl (String text, String controlId) {
         autoIt.controlCommandEditPaste(lastWindowTitleManipulated,"",controlId, text);
     }
 
-    public String controlWithFocus() {
+    /**
+     * <p>Returns the control with focus in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | $control= | get control with focus |
+     * </code></p>
+     *
+     * @return  String  The control with focus. An opaque value.
+     */
+    public String getControlWithFocus() {
         return autoIt.controlGetFocus(lastWindowTitleManipulated);
     }
 
@@ -678,30 +756,104 @@ public class AutoItFixture {
         return executeCommandInListViewOfWindowWithOptionAndOption(command, controlId, lastWindowTitleManipulated, option, option2);
     }
 
+    /**
+     * <p>Returns the number of items in the given ListView in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | $count= | get item count of list view | [CLASS:TspDBListView; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  int  The item count
+     */
     public int getItemCountOfListView (String controlId) {
         return autoIt.controlListViewGetItemCount(lastWindowTitleManipulated, "", controlId);
     }
 
-    public int findItemAndSubitemOfListView (String item, String subItem, String controlId) {
+    /**
+     * <p>Returns the index of teh given item/subitem of a ListView in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | $index= | find item | England | and sub item | London | of list view | [CLASS:TspDBListView; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param item The item to find
+     * @param subItem The subitem to find
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  int  The item index
+     */
+    public int findItemAndSubItemOfListView (String item, String subItem, String controlId) {
         return autoIt.controlListViewFindItem(lastWindowTitleManipulated,"", controlId, item, subItem);
     }
 
+    /**
+     * <p>Returns the number of items selected in the given ListView in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | $count= | get item count of list view | [CLASS:TspDBListView; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  int  The item count
+     */
     public int getSelectionCountOfListView (String controlId) {
         return autoIt.controlListViewGetSelectedCount(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Returns the selected item in the given ListView in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | $item= | get selected item of list view | [CLASS:TspDBListView; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  String  The item selected
+     */
     public String getSelectedItemOfListView (String controlId) {
         return autoIt.controlListViewGetSelected(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Returns true if teh given item is selected in the given ListView in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | is selection | London | of list view | [CLASS:TspDBListView; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param item The item to check
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  boolean  true if the given value passed is the selected item
+     */
     public boolean isSelectionOfListView (String item, String controlId) {
         return autoIt.controlListViewIsSelected(lastWindowTitleManipulated,"", controlId, item);
     }
 
+    /**
+     * <p>Selects the given menu item in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | select menu item | Edit |
+     * </code></p>
+     *
+     * @param menuItem The item to select
+     * @return  boolean  true if the menu item was selected
+     */
     public boolean selectMenuItem (String menuItem){
         return autoIt.winMenuSelectItem(lastWindowTitleManipulated, "", menuItem);
     }
 
+    /**
+     * <p>Selects the given menu item and subitem in the last window (that was manipulated with any API that
+     * takes a window title).
+     * <p><code>
+     * | select menu item | Edit | sub item | Paste |
+     * </code></p>
+     *
+     * @param menuItem The item to select
+     * @param subItem The subitem to select
+     * @return  boolean  true if the menu item / subitem was selected
+     */
     public boolean selectMenuItemSubitem (String menuItem, String subItem){
         return autoIt.winMenuSelectItem(lastWindowTitleManipulated, "", menuItem, subItem);
     }
