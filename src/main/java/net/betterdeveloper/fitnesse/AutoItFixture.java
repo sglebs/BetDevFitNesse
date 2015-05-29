@@ -80,9 +80,9 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Starts a given application (EXE) controlling its show flag</p>
+     * <p>Starts a given application (EXE) controlling its show flag.
      * 4:  SW_SHOWNOACTIVATE, 3: SW_MAXIMIZE, 2: SW_SHOWMINIMIZED, 1: SW_SHOWNORMAL, 0: SW_HIDE,
-     * 10: SW_SHOWDEFAULT, 7: SW_SHOWMINNOACTIVE
+     * 10: SW_SHOWDEFAULT, 7: SW_SHOWMINNOACTIVE </p>
      * <p><code>
      * | $pid= | start app | notepad.exe | with show flag | 10 |
      * </code></p>
@@ -270,7 +270,7 @@ public class AutoItFixture {
      * </code></p>
      *
      * @param   windowTitle    The title of the window to wait for
-     * @return  String         The handle for teh given window. An opaque value.
+     * @return  String         The handle for the given window. An opaque value.
      */
     public String getHandleOfWindow(String windowTitle) {
         return autoIt.winGetHandle(windowTitle.trim());
@@ -283,7 +283,7 @@ public class AutoItFixture {
      * | $text= | get text in window |
      * </code></p>
      *
-     * @return  String         The handle for teh given window. An opaque value.
+     * @return  String         The handle for the given window. An opaque value.
      */
     public String getTextInWindow(){
         return autoIt.winGetText(lastWindowTitleManipulated).replaceAll("(\\r|\\n)", ""); // see https://www.autoitscript.com/forum/topic/55945-getting-value-from-visible-text/
@@ -291,7 +291,7 @@ public class AutoItFixture {
 
     /**
      * <p>Clicks the given widget (control) of the given window with the given mouse button,
-     * a certain number of times and at relative coordinates X,Y
+     * a certain number of times and at relative coordinates X,Y</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] | of window | MyApp | with button | left | times | 2 | x | 10 | y | 15 |
      * </code></p>
@@ -299,7 +299,7 @@ public class AutoItFixture {
      * @param controlId The ID of the control being clicked. AutoIt supports various forms here, see the AutoIt docs.
      * @param windowTitle The ID of the window being clicked
      * @param button The name of the mouse button to click. AutoIt supports various values here, see the AutoIt docs.
-     * @param count The number of times to click teh mouse button (2 means double click, etc)
+     * @param count The number of times to click the mouse button (2 means double click, etc)
      * @param x     The relative horizontal offset inside the widget/control where to click
      * @param y     The relative vertical offset inside the widget/control where to click
      * @return  boolean    true if the click(s) requested was(were) successful
@@ -310,7 +310,7 @@ public class AutoItFixture {
 
     /**
      * <p>Clicks the given widget (control) of the given window with the given mouse button,
-     * a certain number of times
+     * a certain number of times</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] | of window | MyApp | with button | left | times | 2 |
      * </code></p>
@@ -318,7 +318,7 @@ public class AutoItFixture {
      * @param controlId The ID of the control being clicked. AutoIt supports various forms here, see the AutoIt docs.
      * @param windowTitle The ID of the window being clicked
      * @param button The name of the mouse button to click. AutoIt supports various values here, see the AutoIt docs.
-     * @param count The number of times to click teh mouse button (2 means double click, etc)
+     * @param count The number of times to click the mouse button (2 means double click, etc)
      * @return  boolean    true if the click(s) requested was(were) successful
      */
     public boolean clickControlOfWindowWithButtonTimes(String controlId, String windowTitle, String button, int count) {
@@ -326,7 +326,7 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Clicks the given widget (control) of the given window with the given mouse button,
+     * <p>Clicks the given widget (control) of the given window with the given mouse button</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] | of window | MyApp | with button | left |
      * </code></p>
@@ -341,7 +341,7 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Clicks the given widget (control) of the given window with the left mouse button,
+     * <p>Clicks the given widget (control) of the given window with the left mouse button</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] | of window | MyApp |
      * </code></p>
@@ -356,7 +356,7 @@ public class AutoItFixture {
 
     /**
      * <p>Clicks the given widget (control) of the last window (that was manipulated with any API that
-     * takes a window title) with the left mouse button
+     * takes a window title) with the left mouse button</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -370,7 +370,7 @@ public class AutoItFixture {
 
     /**
      * <p>Clicks the given widget (control) of the last window (that was manipulated with any API that
-     * takes a window title) with the given mouse button
+     * takes a window title) with the given mouse button</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] | with button | left |
      * </code></p>
@@ -385,7 +385,7 @@ public class AutoItFixture {
 
     /**
      * <p>Clicks the given widget (control) of the last window (that was manipulated with any API that
-     * takes a window title) with the left mouse button at the given offset
+     * takes a window title) with the left mouse button at the given offset</p>
      * <p><code>
      * | click control | [CLASS:TspDBGrid; INSTANCE:1] | at x | 12 | and y | 23 |
      * </code></p>
@@ -401,7 +401,7 @@ public class AutoItFixture {
 
     /**
      * <p>Sends the keystrokes to the current window. Note that some chars have special meaning: ^ for CONTROL etc.
-     * See the AutoIt docs for details.
+     * See the AutoIt docs for details.</p>
      * <p><code>
      * | send keys | ^c |
      * </code></p>
@@ -414,7 +414,7 @@ public class AutoItFixture {
 
     /**
      * <p>Sends the keystrokes to the current window. Note that all chars will be sent literally - no special interpretation of ^ etc.
-     * See the AutoIt docs for details.
+     * See the AutoIt docs for details.</p>
      * <p><code>
      * | send raw keys | ^c |
      * </code></p>
@@ -428,7 +428,7 @@ public class AutoItFixture {
     /**
      * <p>Sends the keystrokes to the given control in the the last window (that was manipulated with any API that
      * takes a window title). Note that some chars have special meaning: ^ for CONTROL etc.
-     * See the AutoIt docs for details.
+     * See the AutoIt docs for details.</p>
      * <p><code>
      * | send keys | ^c | to control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -443,7 +443,7 @@ public class AutoItFixture {
     /**
      * <p>Sends the keystrokes to the given control in the the last window (that was manipulated with any API that
      * takes a window title). Note that all chars will be sent literally - no special interpretation of ^ etc.
-     * See the AutoIt docs for details.
+     * See the AutoIt docs for details.</p>
      * <p><code>
      * | send raw keys | ^c | to control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -457,7 +457,7 @@ public class AutoItFixture {
 
     /**
      * <p>Appends the text to the given control in the the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | append text | hello world | to control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -471,7 +471,7 @@ public class AutoItFixture {
 
     /**
      * <p>Sets the text to the given control in the the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | set text | hello world | in control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -493,7 +493,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns the text in the given control in the the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $text= | get text in control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -506,7 +506,7 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Returns the text in the status bar in the the given window
+     * <p>Returns the text in the status bar in the the given window</p>
      * <p><code>
      * | $text= | get text in status bar of window | Calculator |
      * </code></p>
@@ -521,7 +521,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns the text in the status bar in the the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $text= | get text in status bar |
      * </code></p>
@@ -533,7 +533,7 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Returns the text in the clipboard
+     * <p>Returns the text in the clipboard</p>
      * <p><code>
      * | $text= | get text in clipboard |
      * </code></p>
@@ -545,7 +545,7 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Sets the text in the clipboard
+     * <p>Sets the text in the clipboard</p>
      * <p><code>
      * | set text in clipboard to | My text |
      * </code></p>
@@ -557,14 +557,14 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Returns the Tab of the given control in the given window
-     * <p><code>
+     * <p>Returns the Tab of the given control in the given window</p>
+     * <p><code></p>
      * | $tab= | get tab of control | [CLASS:TspDBGrid; INSTANCE:1] | of window | Calculator |
      * </code></p>
      *
      * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
      * @param windowTitle The name of the window being manipulated
-     * @return  String  The tab of teh control in the window. An opaque value.
+     * @return  String  The tab of the control in the window. An opaque value.
      */
     public String getTabOfControlOfWindow (String controlId, String windowTitle) {
         lastWindowTitleManipulated=windowTitle;
@@ -573,7 +573,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns the Tab of the given control in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $tab= | get tab of control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -587,7 +587,7 @@ public class AutoItFixture {
 
     /**
      * <p>Go to the next tab (to the right) of the Tab of the given control in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | go to tab right of control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -600,7 +600,7 @@ public class AutoItFixture {
 
     /**
      * <p>Go to the previous tab (to the left) of the Tab of the given control in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | go to tab left of control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -611,35 +611,113 @@ public class AutoItFixture {
         autoIt.controlCommandTabLeft(lastWindowTitleManipulated, "", controlId);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given control and given window, with
+     * the option as parameter.</p>
+     * <p><code>
+     * | execute command | EditPaste | in control | [CLASS:TspDBGrid; INSTANCE:1] | of window | Calculator | with option | text to paste |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @param windowTitle The name of the window being manipulated
+     * @param option The "extra stuff" to pass to the given @command.
+     * @return String The result of the command executed - it depends on what command you requested.
+     */
     public String executeCommandInControlOfWindowWithOption(String command, String controlId, String windowTitle, String option){
         lastWindowTitleManipulated=windowTitle;
         return autoIt.controlCommandString(windowTitle, "", controlId, command, option);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given control and in the last window (that was manipulated with
+     * any API that takes a window title), with the option as parameter.</p>
+     * <p><code>
+     * | execute command | EditPaste | in control | [CLASS:TspDBGrid; INSTANCE:1] | with option | text to paste |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @param option The "extra stuff" to pass to the given @command.
+     * @return String The result of the command executed - it depends on what command you requested.
+     */
     public String executeCommandInControlWithOption(String command, String controlId, String option){
         return executeCommandInControlOfWindowWithOption(command, controlId, lastWindowTitleManipulated, option);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given control and in the last window (that was manipulated with
+     * any API that takes a window title)</p>
+     * <p><code>
+     * | execute command | GetSelected | in control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return String The result of the command executed - it depends on what command you requested.
+     */
     public String executeCommandInControl(String command, String controlId){
         return executeCommandInControlWithOption(command, controlId, "");
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given control and given window, with
+     * the option as parameter.</p>
+     * <p><code>
+     * | execute boolean command | IsVisible | in control | [CLASS:TspDBGrid; INSTANCE:1] | of window | Calculator | with option | "" |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @param windowTitle The name of the window being manipulated
+     * @param option The "extra stuff" to pass to the given @command.
+     * @return boolean The result of the command executed - it depends on what command you requested.
+     */
     public boolean executeBooleanCommandInControlOfWindowWithOption(String command, String controlId, String windowTitle, String option){
         lastWindowTitleManipulated=windowTitle;
         return autoIt.controlCommandBoolean(windowTitle, "", controlId, command, option);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given control and given window, with
+     * the option as parameter.</p>
+     * <p><code>
+     * | execute boolean command | IsVisible | in control | [CLASS:TspDBGrid; INSTANCE:1] | of window | Calculator | with option | "" |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @param option The "extra stuff" to pass to the given @command.
+     * @return boolean The result of the command executed - it depends on what command you requested.
+     */
     public boolean executeBooleanCommandInControlWithOption(String command, String controlId, String option){
         return executeBooleanCommandInControlOfWindowWithOption(command, controlId, lastWindowTitleManipulated, option);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given control and given window, with
+     * the option as parameter.</p>
+     * <p><code>
+     * | execute boolean command | IsVisible | in control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return boolean The result of the command executed - it depends on what command you requested.
+     */
     public boolean executeBooleanCommandInControl(String command, String controlId){
         return executeBooleanCommandInControlWithOption(command, controlId, "");
     }
 
     /**
      * <p>Returns true if the given control is checked - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | control is checked | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -653,7 +731,7 @@ public class AutoItFixture {
 
     /**
      * <p>Check the given control - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | check control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -666,7 +744,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns true if the given control is enabled - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | control is enabled | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -680,7 +758,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns true if the given control is visible - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | control is visible | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -694,7 +772,7 @@ public class AutoItFixture {
 
     /**
      * <p>Select a given item in the control - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | select item | London | of control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -708,7 +786,7 @@ public class AutoItFixture {
 
     /**
      * <p>Focus the given control - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | focus on control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -722,7 +800,7 @@ public class AutoItFixture {
 
     /**
      * <p>Paste the given text in the given control - in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | paste | my text | in control | [CLASS:TspDBGrid; INSTANCE:1] |
      * </code></p>
@@ -736,7 +814,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns the control with focus in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $control= | get control with focus |
      * </code></p>
@@ -747,18 +825,48 @@ public class AutoItFixture {
         return autoIt.controlGetFocus(lastWindowTitleManipulated);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given ListView control and given window, with
+     * the options as parameters.</p>
+     * <p><code>
+     * | execute command | EditPaste | in list view | [CLASS:TspDBListView; INSTANCE:1] | of window | Calculator | with option | text to paste | and option | foobar |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @param windowTitle The name of the window being manipulated
+     * @param option The "extra stuff" to pass to the given @command.
+     * @param option2 The "extra stuff" to pass to the given @command.
+     * @return String The result of the command executed - it depends on what command you requested.
+     */
     public String executeCommandInListViewOfWindowWithOptionAndOption(String command, String controlId, String windowTitle, String option, String option2){
         lastWindowTitleManipulated=windowTitle;
         return autoIt.controlListViewString(windowTitle, "", controlId, command, option, option2);
     }
 
+    /**
+     * <p>Low level API - check the AutoIt documentation under ControlCommand.
+     * Executes the given command in the given ListView control in the last window
+     * (that was manipulated with any API tha takes a window title), with
+     * the options as parameters.</p>
+     * <p><code>
+     * | execute command | EditPaste | in list view | [CLASS:TspDBListView; INSTANCE:1] | with option | text to paste |
+     * </code></p>
+     *
+     * @param command The command to execute (check the AUtoIt documentation).
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @param option The "extra stuff" to pass to the given @command.
+     * @param option2 The "extra stuff" to pass to the given @command.
+     * @return String The result of the command executed - it depends on what command you requested.
+     */
     public String executeCommandInListViewWithOptionAndOption(String command, String controlId, String option, String option2){
         return executeCommandInListViewOfWindowWithOptionAndOption(command, controlId, lastWindowTitleManipulated, option, option2);
     }
 
     /**
      * <p>Returns the number of items in the given ListView in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $count= | get item count of list view | [CLASS:TspDBListView; INSTANCE:1] |
      * </code></p>
@@ -771,8 +879,8 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Returns the index of teh given item/subitem of a ListView in the last window (that was manipulated with any API that
-     * takes a window title).
+     * <p>Returns the index of the given item/subitem of a ListView in the last window (that was manipulated with any API that
+     * takes a window title).</p>
      * <p><code>
      * | $index= | find item | England | and sub item | London | of list view | [CLASS:TspDBListView; INSTANCE:1] |
      * </code></p>
@@ -788,7 +896,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns the number of items selected in the given ListView in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $count= | get item count of list view | [CLASS:TspDBListView; INSTANCE:1] |
      * </code></p>
@@ -802,7 +910,7 @@ public class AutoItFixture {
 
     /**
      * <p>Returns the selected item in the given ListView in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | $item= | get selected item of list view | [CLASS:TspDBListView; INSTANCE:1] |
      * </code></p>
@@ -815,8 +923,8 @@ public class AutoItFixture {
     }
 
     /**
-     * <p>Returns true if teh given item is selected in the given ListView in the last window (that was manipulated with any API that
-     * takes a window title).
+     * <p>Returns true if the given item is selected in the given ListView in the last window (that was manipulated with any API that
+     * takes a window title).</p>
      * <p><code>
      * | is selection | London | of list view | [CLASS:TspDBListView; INSTANCE:1] |
      * </code></p>
@@ -831,7 +939,7 @@ public class AutoItFixture {
 
     /**
      * <p>Selects the given menu item in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | select menu item | Edit |
      * </code></p>
@@ -845,7 +953,7 @@ public class AutoItFixture {
 
     /**
      * <p>Selects the given menu item and subitem in the last window (that was manipulated with any API that
-     * takes a window title).
+     * takes a window title).</p>
      * <p><code>
      * | select menu item | Edit | sub item | Paste |
      * </code></p>
