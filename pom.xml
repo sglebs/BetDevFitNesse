@@ -150,6 +150,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
+        <!-- for the RemoteWebDriverFixture -->
+        <selenium.version>2.45.0</selenium.version>
+        <orgjson.version>20140107</orgjson.version>
+        <maven-classpath-plugin.version>1.7</maven-classpath-plugin.version>
+        <slf4j.version>1.6.6</slf4j.version>
+        <commons-lang.version>2.6</commons-lang.version>
     </properties>
 
     <dependencies>
@@ -182,6 +188,51 @@
             <systemPath>${project.basedir}/lib/AutoItX4Java.jar</systemPath>
         </dependency>
         -->
+
+        <!-- for the RemoteWebDriverFixture -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-remote-driver</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${orgjson.version}</version>
+        </dependency>
+        <!-- for some reason FitNesse appears to conflict with guava 15 from selenium -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>14.0</version>
+        </dependency>
+        <!-- runtime dependencies -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
 </project>
