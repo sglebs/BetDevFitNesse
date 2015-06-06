@@ -68,11 +68,29 @@ public class RemoteWebDriverFixture {
         return lastElement!=null;
     }
 
-    public boolean clickOnElementNamed (String name) {
+    public boolean findElementByXpath (String xpath) {
+        lastElement = webDriver.findElement(By.xpath(xpath));
+        return lastElement!=null;
+    }
+
+    public boolean clickOnElementWithName (String name) {
         boolean found = findElementByName(name);
         if (found)
             lastElement.click();
         return found;
+    }
+
+    public boolean clickOnElementWithXpath (String xpath) {
+        boolean found = findElementByXpath(xpath);
+        if (found)
+            lastElement.click();
+        return found;
+    }
+
+    public boolean clickOnElement() {
+        if (lastElement!=null)
+            lastElement.click();
+        return lastElement!=null;
     }
 
 }
