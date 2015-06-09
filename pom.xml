@@ -165,6 +165,13 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>Synthuse</groupId>
+            <artifactId>Synthuse</artifactId>
+            <version>1.2.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/synthuse.jar</systemPath>
+        </dependency>
         <!--
         <dependency>
             <groupId>net.sf.jacob-project</groupId>
