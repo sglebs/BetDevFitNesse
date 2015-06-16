@@ -69,7 +69,7 @@ public class WinCopyDataFixture {
      * @param   timeoutInSeconds    The timeout, in seconds
      */
     public void setTimeout (int timeoutInSeconds)  {
-        bridge.executeCommand (String.format("{\"op\":\"setTimeout\",\"params\":{%i}}", timeoutInSeconds));
+        bridge.executeCommand (String.format("{\"op\":\"setTimeout\",\"params\":[%d]}", timeoutInSeconds));
     }
 
 
@@ -82,7 +82,7 @@ public class WinCopyDataFixture {
      * @param   windowTitle    The title of the window to wait for
      */
     public boolean waitForWindowOpened(String windowTitle) {
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"waitForWindowOpened\",\"params\":{\"%s\"}}", windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"waitForWindowOpened\",\"params\":[\"%s\"]}", windowTitle));
         return result.getBoolean("result");
     }
 
@@ -97,7 +97,7 @@ public class WinCopyDataFixture {
      * @return  boolean    true if the click(s) requested was(were) successful
      */
     public boolean clickControlOfWindow(String controlId, String windowTitle) {
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"clickControlOfWindow\",\"params\":{\"%s\",\"s\"}}", controlId, windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"clickControlOfWindow\",\"params\":[\"%s\",\"s\"]}", controlId, windowTitle));
         return result.getBoolean("result");
     }
 
@@ -127,9 +127,23 @@ public class WinCopyDataFixture {
      * @return  boolean    true if the sendKey requested was successful
      */
     public boolean sendKeysToWindow (String keys, String windowTitle){
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendKeysToWindow\",\"params\":{\"%s\",\"s\"}}", keys, windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendKeysToWindow\",\"params\":[\"%s\",\"s\"]}", keys, windowTitle));
         return result.getBoolean("result");
 
+    }
+
+    /**
+     * <p>Sends the keystrokes to the current window. Note that some chars have special meaning: ^ for CONTROL etc.
+     * See the AutoIt docs for details.</p>
+     * <p><code>
+     * | send keys | ^c |
+     * </code></p>
+     *
+     * @param keys The keys to send to the window, simulating a user typing.
+     * @return  boolean    true if the sendKey requested was successful
+     */
+    public boolean sendKeys (String keys){
+        return sendKeysToWindow(keys, lastWindowTitleManipulated);
     }
 
     /**
@@ -144,7 +158,22 @@ public class WinCopyDataFixture {
      * @return  boolean    true if the sendKey requested was successful
      */
     public boolean sendRawKeysToWindow (String keys, String windowTitle){
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendRawKeysToWindow\",\"params\":{\"%s\",\"s\"}}", keys, windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendRawKeysToWindow\",\"params\":[\"%s\",\"s\"]}", keys, windowTitle));
         return result.getBoolean("result");
     }
+
+    /**
+     * <p>Sends the keystrokes to the current window. Note that all chars will be sent literally - no special interpretation of ^ etc.
+     * See the AutoIt docs for details.</p>
+     * <p><code>
+     * | send raw keys | ^c |
+     * </code></p>
+     *
+     * @param keys The keys to send to the window, simulating a user typing.
+     * @return  boolean    true if the sendKey requested was successful
+     */
+    public boolean sendRawKeys (String keys){
+        return sendRawKeysToWindow(keys, lastWindowTitleManipulated);
+    }
+
 }
