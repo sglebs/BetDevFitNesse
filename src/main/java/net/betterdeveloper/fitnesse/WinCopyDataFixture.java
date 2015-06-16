@@ -97,7 +97,7 @@ public class WinCopyDataFixture {
      * @return  boolean    true if the click(s) requested was(were) successful
      */
     public boolean clickControlOfWindow(String controlId, String windowTitle) {
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"clickControlOfWindow\",\"params\":[\"%s\",\"s\"]}", controlId, windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"clickControlOfWindow\",\"params\":[\"%s\",\"%s\"]}", controlId, windowTitle));
         return result.getBoolean("result");
     }
 
@@ -127,7 +127,7 @@ public class WinCopyDataFixture {
      * @return  boolean    true if the sendKey requested was successful
      */
     public boolean sendKeysToWindow (String keys, String windowTitle){
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendKeysToWindow\",\"params\":[\"%s\",\"s\"]}", keys, windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendKeysToWindow\",\"params\":[\"%s\",\"%s\"]}", keys, windowTitle));
         return result.getBoolean("result");
 
     }
@@ -158,7 +158,7 @@ public class WinCopyDataFixture {
      * @return  boolean    true if the sendKey requested was successful
      */
     public boolean sendRawKeysToWindow (String keys, String windowTitle){
-        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendRawKeysToWindow\",\"params\":[\"%s\",\"s\"]}", keys, windowTitle));
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendRawKeysToWindow\",\"params\":[\"%s\",\"%s\"]}", keys, windowTitle));
         return result.getBoolean("result");
     }
 
@@ -174,6 +174,95 @@ public class WinCopyDataFixture {
      */
     public boolean sendRawKeys (String keys){
         return sendRawKeysToWindow(keys, lastWindowTitleManipulated);
+    }
+
+    /**
+     * <p>Closes the given window</p>
+     * <p><code>
+     * | close window | Calculator |
+     * </code></p>
+     *
+     * @param   windowTitle    The title of the window to close
+     * @return  boolean    true if the request was successful
+     */
+    public boolean closeWindow (String windowTitle) {
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"closeWindow\",\"params\":[\"%s\"]}", windowTitle));
+        return result.getBoolean("result");
+    }
+
+    /**
+     * <p>Closes the last window that was manipulated with any API that takes a window title</p>
+     * <p><code>
+     * | close window |
+     * </code></p>
+     *
+     * @return  boolean    true if the request was successful
+     */
+    public boolean closeWindow () {
+        return closeWindow(lastWindowTitleManipulated);
+    }
+
+
+    /**
+     * <p>Focus the given control - in the last window (that was manipulated with any API that
+     * takes a window title).</p>
+     * <p><code>
+     * | focus on control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being passed. AutoIt supports various forms here, see the AutoIt docs.
+     * @return  boolean  true if the focus worked
+     */
+    public boolean focusOnControl (String controlId) {
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"focusOnControl\",\"params\":[\"%s\"]}", controlId));
+        return result.getBoolean("result");
+    }
+
+    /**
+     * <p>Returns the text in the clipboard</p>
+     * <p><code>
+     * | $text= | get text in clipboard |
+     * </code></p>
+     *
+     * @return  String  The text in the clipboard
+     */
+    public String getTextInClipboard() {
+        JSONObject result = bridge.executeCommand("{\"op\":\"getTextInClipboard\"}");
+        //return result.getString("result");
+        return "foo"; // FIXME. Replace with line above when done.
+    }
+
+    /**
+     * <p>Clicks the given widget (control) of the last window (that was manipulated with any API that
+     * takes a window title) with the left mouse button at the given offset</p>
+     * <p><code>
+     * | click control | [CLASS:TspDBGrid; INSTANCE:1] | at x | 12 | and y | 23 |
+     * </code></p>
+     *
+     * @param controlId The ID of the control being clicked. AutoIt supports various forms here, see the AutoIt docs.
+     * @param x     The relative horizontal offset inside the widget/control where to click
+     * @param y     The relative vertical offset inside the widget/control where to click
+     * @return  boolean    true if the click(s) requested was(were) successful
+     */
+    public boolean clickControlAtXAndY(String controlId, int x, int y) {
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"clickControlAtXAndY\",\"params\":[\"%s\",%d,%d]}", controlId, x, y));
+        return result.getBoolean("result");
+    }
+
+    /**
+     * <p>Sends the keystrokes to the given control in the the last window (that was manipulated with any API that
+     * takes a window title). Note that some chars have special meaning: ^ for CONTROL etc.
+     * See the AutoIt docs for details.</p>
+     * <p><code>
+     * | send keys | ^c | to control | [CLASS:TspDBGrid; INSTANCE:1] |
+     * </code></p>
+     *
+     * @param keys The keys to send to the control, simulating a user typing.
+     * @return  boolean    true if the keys(s) sent was(were) successful
+     */
+    public boolean sendKeysToControl(String keys, String controlId){
+        JSONObject result = bridge.executeCommand (String.format("{\"op\":\"sendKeysToControl\",\"params\":[\"%s\",\"%s\"]}", keys, controlId));
+        return result.getBoolean("result");
     }
 
 }
